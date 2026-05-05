@@ -1,0 +1,42 @@
+name: PDF处理
+
+on:
+  push:
+    paths:
+      - 'pdfs/**'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  process:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 安装依赖
+        run: |
+          pip install PyMuPDF
+          sudo apt-get update && sudo apt-get install -y poppler-utils
+
+      - name: 处理PDF
+        run: python scripts/process_pdf.py
+
+      - name: 上传Pages产物
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+
+  deploy:
+    needs: process
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: 部署到GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

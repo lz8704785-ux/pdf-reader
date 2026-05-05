@@ -1,39 +1,26 @@
-# exam-kb
+# PDF阅读器
 
-#### 介绍
-{**以下是 Gitee 平台说明，您可以替换此简介**
-Gitee 是 OSCHINA 推出的基于 Git 的代码托管平台（同时支持 SVN）。专为开发者提供稳定、高效、安全的云端软件开发协作平台
-无论是个人、团队、或是企业，都能够用 Gitee 实现代码托管、项目管理、协作开发。企业项目请看 [https://gitee.com/enterprises](https://gitee.com/enterprises)}
+把PDF文件推送到 `pdfs/` 文件夹，GitHub Actions 自动将每页转为高清图片，部署到 GitHub Pages 供手机/浏览器查看。
 
-#### 软件架构
-软件架构说明
+## 使用方法
 
+```bash
+# 1. 把PDF复制到pdfs文件夹
+cp 你的文件.pdf pdfs/
 
-#### 安装教程
+# 2. 提交推送
+git add pdfs/
+git commit -m "添加PDF"
+git push
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+# 3. 等待自动处理完成后访问 GitHub Pages 查看
+```
 
-#### 使用说明
+## 目录结构
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### 参与贡献
-
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
-
-
-#### 特技
-
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+```
+pdfs/                ← 放PDF文件
+scripts/             ← 处理脚本
+docs/                ← 自动生成的网页（GitHub Pages）
+.github/workflows/   ← 自动化工作流
+```
