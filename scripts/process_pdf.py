@@ -36,9 +36,6 @@ for pdf_path in pdf_files:
 
         img_filename = f"{safe_name}_p{page_num + 1}.jpg"
         img_path = os.path.join(IMAGES_DIR, img_filename)
-        pix.save(img_filename, output="jpg", jpg_quality=85)
-
-        # PyMuPDF save to file path
         img_bytes = pix.tobytes(output="jpg", jpg_quality=85)
         with open(img_path, "wb") as f:
             f.write(img_bytes)
