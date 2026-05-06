@@ -2,6 +2,8 @@ name: PDF处理
 
 on:
   push:
+    paths:
+      - 'pdfs/**'
   workflow_dispatch:
 
 permissions:
