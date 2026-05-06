@@ -31,13 +31,17 @@ for pdf_path in pdf_files:
 
     for page_num in range(len(doc)):
         page = doc.load_page(page_num)
-        # 2x缩放获得高清图片
         mat = fitz.Matrix(2, 2)
-        pix = page.get_pixmap(matrix=mat)
+        pix = page.get_pixmap(matrix=mat, alpha=False)
 
-        img_filename = f"{safe_name}_p{page_num + 1}.png"
+        img_filename = f"{safe_name}_p{page_num + 1}.jpg"
         img_path = os.path.join(IMAGES_DIR, img_filename)
-        pix.save(img_path)
+        pix.save(img_filename, output="jpg", jpg_quality=85)
+
+        # PyMuPDF save to file path
+        img_bytes = pix.tobytes(output="jpg", jpg_quality=85)
+        with open(img_path, "wb") as f:
+            f.write(img_bytes)
         page_images.append(f"images/{img_filename}")
 
         print(f"  第 {page_num + 1}/{len(doc)} 页")
